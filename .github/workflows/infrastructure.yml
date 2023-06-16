@@ -37,20 +37,22 @@ jobs:
 
   EKS_Deployment:
     runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    defaults:
+      run:
+        working-directory: terraform/eks_infrastructure
     needs: pre-commit
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
 
-      - name: Terraform Set-up
-        working-directory: ./terraform/eks_infrastructure
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: terraform --version
-
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.1
+          terraform_wrapper: false
 
       - name: Terraform Init
         working-directory: ./terraform/eks_infrastructure
