@@ -2,9 +2,9 @@ name: Infrastructure_Deployment
 
 on:
   push:
-    branches: [infrastructure]
+    branches: [infra]
   pull_request:
-    branches: [infrastructure]
+    branches: [infra]
 
 jobs:
   pre-commit:
