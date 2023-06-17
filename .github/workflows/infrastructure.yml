@@ -72,7 +72,7 @@ jobs:
       # run: terraform apply -auto-approve
 
       - uses: actions/github-script@v6
-        if: github.event_name == 'pull_request'
+        # if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
