@@ -1,9 +1,9 @@
 name: Node js app deploy to EKS
 on:
   push:
-    branches: ['infra']
+    branches: ['deploy']
   pull_request:
-    branches: ['infra']
+    branches: ['deploy']
 
 jobs:
   integration:
