@@ -100,4 +100,3 @@ jobs:
           kubectl apply -f ml_app.yml
           kubectl set image deployment/housing_api -n=deployment housing_api=lukhee/housing_api:latest
           kubectl get svc
-          # kubectl apply -f service.yaml
