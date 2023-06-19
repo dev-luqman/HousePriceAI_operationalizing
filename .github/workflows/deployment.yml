@@ -99,4 +99,4 @@ jobs:
         run: |
           kubectl apply -f ml_app.yml
           kubectl set image deployment/housing -n=deployment housing=lukhee/housing_api:latest
-          kubectl get svc
+          kubectl get svc -n deployment
