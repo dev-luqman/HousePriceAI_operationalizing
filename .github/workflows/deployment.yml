@@ -39,6 +39,9 @@ jobs:
       # - name: Test Application
       #   run: |
       #     make test
+      - name: Check Working directory
+        run: |
+          ls
 
       - name: Install Packages
         uses: hadolint/hadolint-action@v3.1.0
