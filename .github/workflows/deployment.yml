@@ -40,10 +40,10 @@ jobs:
       #   run: |
       #     make test
 
-      # - name: Install Packages
-      #   uses: hadolint/hadolint-action@v3.1.0
-      #   with:
-      #     dockerfile: Dockerfile
+      - name: Install Packages
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
   deploy:
     runs-on: ubuntu-latest
     defaults:
@@ -80,19 +80,6 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USER }}/housing_api:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USER }}/housing_api:latest
-
-      # - name: Login to Amazon ECR
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v1
-
-      # - name: Build, tag, and push docker image to Amazon ECR
-      #   env:
-      #     REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     REPOSITORY: primuslearning
-      #     IMAGE_TAG: 1.1
-      #   run: |
-      #     docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-      #     docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
       - name: Update kube config
         run: aws eks update-kubeconfig --name eks-cluster
