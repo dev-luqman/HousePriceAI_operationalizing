@@ -74,11 +74,11 @@ resource "aws_eks_node_group" "nodes_general" {
 
   # Configuration block with scaling settings
   scaling_config {
-    desired_size = 2
+    desired_size = 1
 
     max_size = 2
 
-    min_size = 2
+    min_size = 1
   }
 
   ami_type = "AL2_x86_64"
@@ -92,7 +92,7 @@ resource "aws_eks_node_group" "nodes_general" {
   force_update_version = false
 
   # List of instance types associated with the EKS Node Group
-  instance_types = ["t3.small"]
+  instance_types = ["t3.large"]
 
   labels = {
     role = "nodes-general"
