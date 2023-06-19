@@ -6,20 +6,20 @@ on:
     branches: ['infra']
 
 jobs:
-  c_integration:
+  integration:
     runs-on: ubunty-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
+      # - name: Set up Python
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: 3.x
 
-      - name: Install Packages
-        run: |
-          make install
+      # - name: Install Packages
+      #   run: |
+      #     make install
 
   # use makefile command
   # lint project
@@ -28,7 +28,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
-    needs: c_integration
+    needs: integration
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
