@@ -46,10 +46,10 @@ jobs:
       #     dockerfile: Dockerfile
   deploy:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
     defaults:
       run:
         working-directory: ml_app
+    if: github.event_name == 'push'
     needs: integration
     steps:
       - name: Checkout code
