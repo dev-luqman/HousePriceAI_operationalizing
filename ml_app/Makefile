@@ -17,8 +17,8 @@ install:
 
 test:
 	# Additional, optional, tests could go here
-	#python -m pytest -vv --cov=myrepolib tests/*.py
-	#python -m pytest --nbval notebook.ipynb
+	python -m pytest -vv --cov=myrepolib test_sample/*.py
+	# python -m pytest --nbval notebook.ipynbgit stat
 
 lint:
 	# See local hadolint install instructions:   https://github.com/hadolint/hadolint
