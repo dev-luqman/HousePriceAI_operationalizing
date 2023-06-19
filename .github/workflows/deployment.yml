@@ -90,6 +90,7 @@ jobs:
 
       - name: Deploy to EKS
         working-directory: deployment
+        continue-on-error: true
         run: |
           kubectl create namespace deployment
           kubectl apply -f ml_app.yml
