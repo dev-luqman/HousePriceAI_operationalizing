@@ -7,7 +7,7 @@ on:
 
 jobs:
   integration:
-    runs-on: ubunty-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
