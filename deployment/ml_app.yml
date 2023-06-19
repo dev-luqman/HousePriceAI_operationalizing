@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: housing_api
+  name: housing
   namespace: deployment
   labels:
-    app: housing_api
+    app: housing
 
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: housing_api
+      app: housing
   template:
     metadata:
       labels:
-        app: housing_api
+        app: housing
 
     spec:
       containers:
-        - name: housing_api
+        - name: housing
           image: lukhee/housing_api:latest
           ports:
             - containerPort: 80
@@ -27,11 +27,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: housing_api
+  name: housing
   namespace: deployment
 spec:
   selector:
-    app: housing_api
+    app: housing
   type: LoadBalancer
   ports:
     - port: 80
