@@ -47,9 +47,9 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ml_app
+    # defaults:
+    #   run:
+    #     working-directory: ml_app
     if: github.event_name == 'push'
     needs: integration
     steps:
@@ -71,8 +71,11 @@ jobs:
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build
+        working-directory: ml_app
         run: docker build -t housing_api .
+
       - name: Tags
         run: |
           docker tag housing_api ${{ secrets.DOCKER_USER }}/housing_api:${{ github.sha }}
@@ -86,7 +89,8 @@ jobs:
         run: aws eks update-kubeconfig --name eks
 
       - name: Deploy to EKS
+        working-directory: deployment
         run: |
-          kubectl apply -f deployment/ml_app.yml
+          kubectl apply -f ml_app.yml
           kubectl set image deployment/housing_api -n=deployment housing_api=lukhee/housing_api:latest
           # kubectl apply -f service.yaml
