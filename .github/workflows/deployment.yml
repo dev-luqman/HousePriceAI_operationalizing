@@ -68,15 +68,15 @@ jobs:
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build
-        run: docker build -t housingAPI .
+        run: docker build -t housing_api .
       - name: Tags
         run: |
-          docker tag housingAPI ${{ secrets.DOCKER_USER }}/housingAPI:${{ github.sha }}
-          docker tag housingAPI ${{ secrets.DOCKER_USER }}/housingAPI:latest
+          docker tag housing_api ${{ secrets.DOCKER_USER }}/housing_api:${{ github.sha }}
+          docker tag housing_api ${{ secrets.DOCKER_USER }}/housing_api:latest
       - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/housingAPI:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USER }}/housingAPI:latest
+          docker push ${{ secrets.DOCKER_USER }}/housing_api:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/housing_api:latest
 
       # - name: Login to Amazon ECR
       #   id: login-ecr
