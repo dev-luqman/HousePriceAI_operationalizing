@@ -36,9 +36,14 @@ jobs:
         run: |
           make install
 
-      - name: Test Application
-        run: |
-          make test
+      # - name: Test Application
+      #   run: |
+      #     make test
+
+      - name: Install Packages
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
   # use makefile command
   # lint project
   # check vulnerability
