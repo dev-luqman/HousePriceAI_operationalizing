@@ -40,10 +40,16 @@ jobs:
       #   run: |
       #     make test
 
+      - name: Checking working dir
+        run: |
+          ls
+          cd ~/
+          ls
+
       - name: Lint with hadolint
         uses: hadolint/hadolint-action@v1.5.0
         with:
-          dockerfile: ./Dockerfile
+          dockerfile: ml_app/Dockerfile
   deploy:
     runs-on: ubuntu-latest
     defaults:
