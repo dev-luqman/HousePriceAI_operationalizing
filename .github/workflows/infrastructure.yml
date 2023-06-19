@@ -107,8 +107,3 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
-
-      # - name: Lint dockerfile
-      #   uses: hadolint/hadolint-action@v3.1.0
-      #   with:
-      #     dockerfile: ./ml_app/Dockerfile
