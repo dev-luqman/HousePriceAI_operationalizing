@@ -88,11 +88,16 @@ jobs:
       - name: Update kube config
         run: aws eks update-kubeconfig --name eks
 
-      - name: Deploy to EKS
+      - name: Create Namespace
         working-directory: deployment
         continue-on-error: true
         run: |
           kubectl create namespace deployment
+
+      - name: Deploy to EKS
+        working-directory: deployment
+        run: |
           kubectl apply -f ml_app.yml
           kubectl set image deployment/housing_api -n=deployment housing_api=lukhee/housing_api:latest
+          kubectl get svc
           # kubectl apply -f service.yaml
