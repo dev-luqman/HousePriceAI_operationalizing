@@ -47,6 +47,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
+    defaults:
+      run:
+        working-directory: ml_app
     needs: integration
     steps:
       - name: Checkout code
