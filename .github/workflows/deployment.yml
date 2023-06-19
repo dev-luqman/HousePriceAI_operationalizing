@@ -40,16 +40,11 @@ jobs:
       #   run: |
       #     make test
 
-      - name: Checking working dir
-        run: |
-          ls
-          cd ~/
-          ls
-
       - name: Lint with hadolint
         uses: hadolint/hadolint-action@v1.5.0
         with:
           dockerfile: ml_app/Dockerfile
+
   deploy:
     runs-on: ubuntu-latest
     defaults:
@@ -87,10 +82,10 @@ jobs:
           docker push ${{ secrets.DOCKER_USER }}/housing_api:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USER }}/housing_api:latest
 
-      - name: Update kube config
-        run: aws eks update-kubeconfig --name eks-cluster
+      # - name: Update kube config
+      #   run: aws eks update-kubeconfig --name eks-cluster
 
-      - name: Deploy to EKS
-        run: |
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
+      # - name: Deploy to EKS
+      #   run: |
+      #     kubectl apply -f deployment.yaml
+      #     kubectl apply -f service.yaml
