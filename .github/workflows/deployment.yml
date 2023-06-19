@@ -39,18 +39,11 @@ jobs:
       # - name: Test Application
       #   run: |
       #     make test
-      - name: Check Working directory
-        run: |
-          ls
 
-      - name: Install Packages
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: ./Dockerfile
-  # use makefile command
-  # lint project
-  # check vulnerability
-  # lint docker file
+      # - name: Install Packages
+      #   uses: hadolint/hadolint-action@v3.1.0
+      #   with:
+      #     dockerfile: Dockerfile
   deploy:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -72,6 +65,19 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build
+        run: docker build -t housingAPI .
+      - name: Tags
+        run: |
+          docker tag housingAPI ${{ secrets.DOCKER_USER }}/housingAPI:${{ github.sha }}
+          docker tag housingAPI ${{ secrets.DOCKER_USER }}/housingAPI:latest
+      - name: Push
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/housingAPI:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/housingAPI:latest
+
       # - name: Login to Amazon ECR
       #   id: login-ecr
       #   uses: aws-actions/amazon-ecr-login@v1
@@ -86,7 +92,7 @@ jobs:
       #     docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
 
       - name: Update kube config
-        run: aws eks update-kubeconfig --name primuslearning
+        run: aws eks update-kubeconfig --name eks-cluster
 
       - name: Deploy to EKS
         run: |
