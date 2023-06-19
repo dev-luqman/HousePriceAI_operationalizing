@@ -91,6 +91,8 @@ jobs:
       - name: Deploy to EKS
         working-directory: deployment
         run: |
+
+          kubectl create namespace deployment
           kubectl apply -f ml_app.yml
           kubectl set image deployment/housing_api -n=deployment housing_api=lukhee/housing_api:latest
           # kubectl apply -f service.yaml
