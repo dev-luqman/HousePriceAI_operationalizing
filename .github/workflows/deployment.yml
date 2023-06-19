@@ -43,7 +43,7 @@ jobs:
       - name: Install Packages
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: Dockerfile
+          dockerfile: ./Dockerfile
   # use makefile command
   # lint project
   # check vulnerability
