@@ -71,7 +71,7 @@ jobs:
       # - name: Terraform Apply
       #   run: terraform apply -auto-approve
 
-      - name: Terraform Apply
+      - name: Terraform destroy infrastruture
         run: terraform destroy -auto-approve
 
       - uses: actions/github-script@v6
