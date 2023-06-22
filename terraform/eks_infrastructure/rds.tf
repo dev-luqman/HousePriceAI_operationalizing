@@ -62,7 +62,7 @@ resource "aws_db_instance" "house_price" {
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
-  engine_version         = "14.1"
+  engine_version         = "14.3"
   username               = "house_price"
   password               = var.db_password
   db_subnet_group_name   = aws_db_subnet_group.house_price.name
