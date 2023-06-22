@@ -58,7 +58,7 @@ resource "aws_db_parameter_group" "house_price" {
 }
 
 resource "aws_db_instance" "house_price" {
-  identifier             = "house_price"
+  identifier             = "houseprice"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
