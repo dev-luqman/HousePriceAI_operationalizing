@@ -48,7 +48,7 @@ resource "aws_security_group" "rds" {
 }
 
 resource "aws_db_parameter_group" "house_price" {
-  name   = "house_price"
+  name   = "houseprice"
   family = "postgres14"
 
   parameter {
