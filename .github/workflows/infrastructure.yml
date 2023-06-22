@@ -43,7 +43,7 @@ jobs:
     defaults:
       run:
         working-directory: terraform/eks_infrastructure
-    needs: pre-commit
+    needs: Terraform_pre-commit
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
