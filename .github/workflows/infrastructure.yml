@@ -68,11 +68,18 @@ jobs:
           terraform plan -no-color
         continue-on-error: true
 
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
+        run: terraform apply -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
 
-      - name: Terraform destroy infrastruture
-        run: terraform destroy -auto-approve
+      - name: Call Terraform output
+        run: |
+          output=$(terraform output)
+          echo $output
+
+      # - name: Terraform destroy infrastruture
+      #   run: terraform destroy -auto-approve
+      #   continue-on-error: true
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
