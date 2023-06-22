@@ -10,8 +10,10 @@ jobs:
   Terraform_pre-commit:
     runs-on: ubuntu-latest
     steps:
+      # Checkout the repository to the GitHub Actions runner
       - uses: actions/checkout@v3
 
+      # Install Pre commit dependencies
       - name: Install TerrformDocs,  & tflint
         run: |
           sudo apt update
@@ -20,9 +22,15 @@ jobs:
           curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
           curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
 
+      # Run Terraform Pre-commit
+      # Pre-commit: Check Fmt
+      # Pre-commit: Check Validate
+      # Pre-commit: Check docs
+      # Pre-commit: Check tflint
       - uses: actions/setup-python@v3
       - uses: pre-commit/action@v3.0.0
 
+      # Send a slack notification for failed
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
@@ -45,21 +53,25 @@ jobs:
         working-directory: terraform/eks_infrastructure
     needs: Terraform_pre-commit
     steps:
+      # Checkout the repository to the GitHub Actions runner
       - name: checkout repo
         uses: actions/checkout@v2
 
+      # Install Terraform CLI with version 1.0.1 and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.0.1
           terraform_wrapper: false
 
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
         working-directory: ./terraform/eks_infrastructure
         id: init
         run: |
           terraform init
 
+      # Generates an execution plan for Terraform
       - name: Terraform Plan
         working-directory: ./terraform/eks_infrastructure
         id: plan
@@ -68,17 +80,20 @@ jobs:
           terraform plan -no-color
         continue-on-error: true
 
+      # On push to infra, build or change infrastructure according to Terraform configuration files
       # - name: Terraform Apply
       #   if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
       #   run: terraform apply -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
 
+      # # Check the Output of some resuourse created
       # - name: Call Terraform output
       #   run: |
       #     output=$(terraform output)
       #     echo $output
 
+      # Destroy all created resources
       - name: Terraform destroy infrastruture
-        run: terraform destroy -auto-approve
+        run: terraform destroy -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
         continue-on-error: true
 
       - uses: actions/github-script@v6
@@ -118,6 +133,7 @@ jobs:
               body: output
             })
 
+      # Send a slack notification
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
