@@ -33,7 +33,7 @@ jobs:
           SLACK_TITLE: Commit Message
           SLACK_USERNAME: rtCamp
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK  }}
-        if: always()
+        if: failure()
 
   EKS_Deployment:
     runs-on: ubuntu-latest
@@ -117,3 +117,15 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: core-api-alert
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_MESSAGE: ${{ github.event.head_commit.message }}
+          SLACK_TITLE: Commit Message
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK  }}
+        if: always()
