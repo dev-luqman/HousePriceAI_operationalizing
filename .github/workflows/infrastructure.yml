@@ -3,9 +3,9 @@ name: Infrastructure_Deployment
 
 on:
   push:
-    branches: [infra]
+    branches: [dev]
   pull_request:
-    branches: [infra]
+    branches: [dev]
 
 jobs:
   Terraform_pre-commit:
