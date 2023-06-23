@@ -49,7 +49,7 @@ To design a scalable and secure continuous delivery architecture for the full-st
         For monitoring, use Amazon CloudWatch to collect and visualize metrics for your application, database, and infrastructure. Configure custom CloudWatch dashboards to display relevant historical metrics for debugging bottlenecks.
         Implement application-level monitoring using AWS X-Ray to trace requests and identify performance bottlenecks within your application code.
 
-### solution 2 using aws eks
+### solution 2 using aws eks and terraform
 
 Architecture Tiers:
 Application Tier: Deploy your application as containerized workloads on AWS EKS. EKS provides a managed Kubernetes control plane and makes it easier to scale and manage containerized applications.
