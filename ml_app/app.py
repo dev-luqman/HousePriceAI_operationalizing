@@ -2,9 +2,17 @@ from flask import Flask, request, jsonify
 from flask.logging import create_logger
 import logging
 
+
 import pandas as pd
 from sklearn.externals import joblib
 from sklearn.preprocessing import StandardScaler
+
+
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+VERSION = os.getenv("VERSION")
 
 app = Flask(__name__)
 LOG = create_logger(app)
@@ -20,7 +28,12 @@ def scale(payload):
 
 @app.route("/")
 def home():
-    html = f"<h3>Sklearn Prediction Home</h3>"
+    html = f"""
+    <div style="text-align:center; padding: 50px"> 
+    <h2>Sklearn Prediction Home Updated. </h2>
+    <h3 style="color:#808080"> Version:{VERSION}</h3>
+    </div>
+    """
     return html.format(format)
 
 @app.route("/predict", methods=['POST'])

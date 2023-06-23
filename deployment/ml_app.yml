@@ -20,6 +20,9 @@ spec:
       containers:
         - name: housing
           image: lukhee/housing_api:latest
+          env:
+          - name: VERSION
+            value: 1.0.0
           ports:
             - containerPort: 80
 
