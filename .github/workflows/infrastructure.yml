@@ -1,3 +1,4 @@
+# This workflow installs Terraform CLI V1.0.0 and configures the Terraform CLI configuration file and install all resourcesunder AWS
 name: Infrastructure_Deployment
 
 on:
@@ -81,20 +82,20 @@ jobs:
         continue-on-error: true
 
       # On push to infra, build or change infrastructure according to Terraform configuration files
-      # - name: Terraform Apply
-      #   if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
-      #   run: terraform apply -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
+        run: terraform apply -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
 
-      # # Check the Output of some resuourse created
-      # - name: Call Terraform output
-      #   run: |
-      #     output=$(terraform output)
-      #     echo $output
+      # Check the Output of some resuourse created
+      - name: Call Terraform output
+        run: |
+          output=$(terraform output)
+          echo $output
 
       # Destroy all created resources
-      - name: Terraform destroy infrastruture
-        run: terraform destroy -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
-        continue-on-error: true
+      # - name: Terraform destroy infrastruture
+      #   run: terraform destroy -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
+      #   continue-on-error: true
 
       - uses: actions/github-script@v6
         if: github.event_name == 'pull_request'
