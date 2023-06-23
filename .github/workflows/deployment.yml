@@ -103,5 +103,5 @@ jobs:
         run: |
           kubectl apply -f ml_app.yml
           kubectl set image deployment/housing -n=deployment housing=lukhee/housing_api:latest
-          kubectl set env VERSION=1.${{ github.run_number }}.0
+          kubectl set env deployment/housing -n=deployment VERSION=1.${{ github.run_number }}.0
           kubectl get svc -n deployment
