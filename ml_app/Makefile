@@ -21,8 +21,8 @@ install_2:
 
 test:
 	# Additional, optional, tests could go here
-	pytest -vv --cov=myrepolib test_sample/*.py
-	# pytest test_sample/*.py
+	# pytest -vv --cov=myrepolib test_sample/*.py
+	pytest test_sample/*.py
 	# python -m pytest --nbval notebook.ipynbgit stat
 
 lint:
