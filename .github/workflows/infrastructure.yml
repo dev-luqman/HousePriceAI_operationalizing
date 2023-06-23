@@ -1,4 +1,4 @@
-# This workflow installs Terraform CLI V1.0.0 and configures the Terraform CLI configuration file and install all resourcesunder AWS
+# This workflow installs Terraform CLI V1.0.0 and configures the Terraform CLI configuration file and install all resources under AWS
 name: Infrastructure_Deployment
 
 on:
