@@ -74,11 +74,11 @@ resource "aws_eks_node_group" "nodes_general" {
 
   # Configuration block with scaling settings
   scaling_config {
-    desired_size = 1
+    desired_size = 2
 
-    max_size = 2
+    max_size = 3
 
-    min_size = 1
+    min_size = 2
   }
 
   ami_type = "AL2_x86_64"
