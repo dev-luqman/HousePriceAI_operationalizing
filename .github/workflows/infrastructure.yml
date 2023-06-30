@@ -48,6 +48,7 @@ jobs:
 
   EKS_Deployment:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -88,7 +89,7 @@ jobs:
       #   if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
       #   run: terraform apply -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
 
-      # Check the Output of some resuourse created
+      # Check the Output of some resuourse created ---
       - name: Call Terraform output
         run: |
           output=$(terraform output)
