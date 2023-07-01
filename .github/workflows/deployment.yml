@@ -92,11 +92,11 @@ jobs:
       - name: Update kube config
         run: aws eks update-kubeconfig --name eks
 
-      - name: Create Namespace
-        working-directory: deployment
-        continue-on-error: true
-        run: |
-          kubectl create namespace deployment
+      # - name: Create Namespace
+      #   working-directory: deployment
+      #   continue-on-error: true
+      #   run: |
+      #     kubectl create namespace deployment
 
       - name: Deploy to EKS
         working-directory: deployment
