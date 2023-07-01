@@ -3,16 +3,23 @@ kind: Ingress
 metadata:
   name: hello-world
   namespace: deployment
-  # annotations:
-  #   kubernetes.io/ingree.class: ngnix
+  annotations:
+    kubernetes.io/ingree.class: ngnix
 spec:
   ingressClassName: nginx
   rules:
   - host: house.devlook.tech
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: "/grafana"
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-grafana  
+            port:
+              number: 80
+      - path: "/"
+        pathType: Prefix
         backend:
           service:
             name: housing 
