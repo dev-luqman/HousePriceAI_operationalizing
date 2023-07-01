@@ -85,14 +85,14 @@ jobs:
         continue-on-error: true
 
       # On push to infra, build or change infrastructure according to Terraform configuration files
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
-        run: terraform apply -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
+      # - name: Terraform Apply
+      #   if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
+      #   run: terraform apply -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
 
       # Destroy all created resources
-      # - name: Terraform destroy infrastruture
-      #   run: terraform destroy -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
-      #   continue-on-error: true
+      - name: Terraform destroy infrastruture
+        run: terraform destroy -var="db_password=${{ secrets.DB_PASSWORD }}" -auto-approve
+        continue-on-error: true
 
       # Check the Output of some resuourse created ---
       - name: Call Terraform output
