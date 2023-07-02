@@ -105,3 +105,41 @@ jobs:
           kubectl set image deployment/housing -n=deployment housing=lukhee/housing_api:latest
           kubectl set env deployment/housing -n=deployment VERSION=1.${{ github.run_number }}.0
           kubectl get svc -n deployment
+
+  ingress_routing:
+    runs-on: ubuntu-latest
+    needs: deploy
+    defaults:
+      run:
+        working-directory: Ingress_Routing
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v2.0
+        with:
+          version: 'v1.24.0' # default is latest stable
+        id: install
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Update kube config
+        run: aws eks update-kubeconfig --name eks
+
+      - name: Deploy Ingress_controll
+        run: |
+          kubectl apply -f ingress_controller.yml
+
+      - name: Deploy routing Ingress
+        run: |
+          kubectl apply -f ingress.yml
+
+      - name: Review ingress update
+        run: |
+          kubectl describe svc ingress -n deployment
