@@ -27,9 +27,11 @@ The main objectives of this project are:
 
 ````
 git clone git@github.com:dev-luqman/HousePriceAI_operationalizing.git
+
 ```
 
 2. Navigate to the project directory:
+
 ````
 
 cd HousePriceAI
@@ -39,7 +41,8 @@ cd HousePriceAI
 3. Set up the Python virtual environment:
   - Create a virtualenv with Python 3.7 and activate it. Refer to this link for help on specifying the Python version in the virtualenv.
 
-```bash
+```
+bash
 python3 -m pip install --user virtualenv
 # You should have Python 3.7 available in your host.
 # Check the Python path using `which python3`
