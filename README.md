@@ -25,21 +25,17 @@ The main objectives of this project are:
 
 1. Clone the repository:
 
-````
+```
 git clone git@github.com:dev-luqman/HousePriceAI_operationalizing.git
-
 ```
 
 2. Navigate to the project directory:
 
-````
-
+```
 cd HousePriceAI
-
-````
+```
 
 3. Set up the Python virtual environment:
-  - Create a virtualenv with Python 3.7 and activate it. Refer to this link for help on specifying the Python version in the virtualenv.
 
 ```
 bash
@@ -49,7 +45,7 @@ python3 -m pip install --user virtualenv
 # Use a command similar to this one:
 python3 -m virtualenv --python=<path-to-Python3.7> .devops
 source .devops/bin/activate
-````
+```
 
 4. Install the project dependencies:
 
