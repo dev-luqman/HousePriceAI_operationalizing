@@ -3,7 +3,7 @@
 
 data "aws_availability_zones" "available" {}
 data "aws_secretsmanager_secret_version" "rds_secret" {
-  secret_id = ml_housing_db_secret
+  secret_id = "ml_housing_db_secret"
 }
 
 locals {
