@@ -11,11 +11,11 @@ spec:
   - host: house.devlook.tech
     http:
       paths:
-      - path: "/grafana"
+      - path: "/nginx"
         pathType: Prefix
         backend:
           service:
-            name: prometheus-grafana  
+            name: nginx  
             port:
               number: 80
       - path: "/"
