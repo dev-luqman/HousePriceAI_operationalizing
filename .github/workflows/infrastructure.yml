@@ -87,7 +87,7 @@ jobs:
       # FORCE UNLOCKING OF FILE
       - name: Terraform Force Unlock file
         if: github.ref == 'refs/heads/infra' && github.event_name == 'push'
-        run: terraform force-unlock 37344fdf-248c-32f8-42a0-310730a428f5
+        run: terraform force-unlock 37344fdf-248c-32f8-42a0-310730a428f5 -y
 
       # On push to infra, build or change infrastructure according to Terraform configuration files
       - name: Terraform Apply
