@@ -2,6 +2,13 @@
 # SPDX-License-Identifier: MPL-2.0
 
 data "aws_availability_zones" "available" {}
+data "aws_secretsmanager_secret_version" "rds_secret" {
+  secret_id = ml_housing_db_secret
+}
+
+locals {
+  db_secret = jsondecode(data.aws_secretsmanager_secret_version.rds_secret.secret_string)
+}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -58,13 +65,15 @@ resource "aws_db_parameter_group" "house_price" {
 }
 
 resource "aws_db_instance" "house_price" {
-  identifier             = "houseprice"
-  instance_class         = "db.t3.micro"
-  allocated_storage      = 5
-  engine                 = "postgres"
-  engine_version         = "14.3"
-  username               = "house_price"
-  password               = var.db_password
+  identifier        = "houseprice"
+  instance_class    = "db.t3.micro"
+  allocated_storage = 5
+  engine            = "postgres"
+  engine_version    = "14.3"
+  # username               = "house_price"
+  # password               = var.db_password
+  username               = local.db_secret.username
+  password               = local.db_secret.password
   db_subnet_group_name   = aws_db_subnet_group.house_price.name
   vpc_security_group_ids = [aws_security_group.rds.id]
   parameter_group_name   = aws_db_parameter_group.house_price.name
