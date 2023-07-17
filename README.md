@@ -78,7 +78,7 @@ To use the HousePriceAI microservice API for predicting housing prices in Boston
 
 ### Infrastructure Flow
 
-![](./assets/infrastructure_flow.ppsx)
+![](./assets/AWS.gif)
 
 ### Project folders/files description
 
