@@ -76,6 +76,10 @@ To use the HousePriceAI microservice API for predicting housing prices in Boston
 
 ![](./assets/git_workflow.png)
 
+### Infrastructure Flow
+
+![](./assets/infrastructure_flow.ppsx)
+
 ### Project folders/files description
 
 ```
