@@ -11,13 +11,13 @@ spec:
   - host: house.devlook.tech
     http:
       paths:
-      - path: "/nginx"
-        pathType: Prefix
-        backend:
-          service:
-            name: nginx  
-            port:
-              number: 80
+      # - path: "/nginx"
+      #   pathType: Prefix
+      #   backend:
+      #     service:
+      #       name: nginx  
+      #       port:
+      #         number: 80
       - path: "/"
         pathType: Prefix
         backend:
